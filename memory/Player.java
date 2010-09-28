@@ -1,5 +1,8 @@
 package memory;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 /**
@@ -7,7 +10,7 @@ import javax.swing.border.EtchedBorder;
  * Spelaren kan vara aktiv eller inaktiv
  * @author jesper
  */
-public class Player extends JButton {
+public class Player extends JButton implements ActionListener{
   private int score;
   private String name;
   
@@ -43,5 +46,9 @@ public class Player extends JButton {
    */
   public void incScore() {
     this.score++;
+  }
+  
+  public void actionPerformed(ActionEvent e) {
+    
   }
 }

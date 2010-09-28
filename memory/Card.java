@@ -1,11 +1,8 @@
 package memory;
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
-
-import com.sun.xml.internal.rngom.digested.DInterleavePattern;
 
 /**
  * Ett kort i ett memoryspel
@@ -62,6 +59,10 @@ public class Card extends JButton {
   public void remove() {
 	  this.state = State.INVISIBLE;
 	  this.setBackground(invisibleColor);
+  }
+  
+  public boolean equals(Object a){
+    return true;
   }
   
   /**
