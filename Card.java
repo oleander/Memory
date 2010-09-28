@@ -1,44 +1,78 @@
+import java.awt.Color;
+
 import javax.swing.JButton;
+import javax.swing.border.EtchedBorder;
 
 /**
  * Ett kort i ett memoryspel
- * @param id ett unikt id som möjliggör identifikation av kort med samma innehåll
- * @param value innehållet i kortet
  */
  
 public class Card extends JButton {
   private int id;
-  private String value;
-  private State state;
+	private String value;
+	private State state;
+	private EtchedBorder border  = new EtchedBorder();
+	private Color invisibleColor = Color.white;
+	private Color downColor      = Color.darkGray;
+	private Color upColor        = Color.gray;
   
-  /**
-   * Skapar ett kort med ansiktet neråt
-   * @param id ett unikt id
-   */
-  
-  public Card (int id) {
+	/**
+	 * Skapar ett kort med ansiktet neråt
+	 * @param id - ett unikt id
+	 */
+  public Card (int id, String value) {
     this.id = id;
+    this.value = value;
     state = State.DOWN;
+    this.setBorder(border);
   }
   
-  
-  
+  /**
+   * @return id kortets unika id
+   */
   public int getId() {
     return id;
   }
   
+  /**
+   * Vänder på kortet. Gör inget om det redan är osynligt.
+   */
   public void flip() {
     if (state == State.UP) {
     	state = State.DOWN;
+    	this.setBackground(downColor);
     	this.setText("");
     }
     if (state == State.DOWN) {
     	state = State.UP;
+    	this.setBackground(upColor);
     	this.setText(value);
     }
   }
   
+  /**
+   * Gör kortet osynligt
+   */
+  public void remove() {
+	  this.state = State.INVISIBLE;
+	  this.setBackground(invisibleColor);
+  }
+  
+  /**
+   * Beskriver tillstånden som ett kort kan befinna sig i
+   */
   public enum State {
-	  UP, DOWN, INVISIBLE
+    /**
+     * Kortet har ansiktet uppåt
+     */
+	  UP, 
+	  /**
+	   * Kortet har ansiktet neråt
+	   */
+	  DOWN, 
+	  /**
+	   * Kortet är osynligt
+	   */
+	  INVISIBLE
   }
 }
