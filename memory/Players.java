@@ -1,3 +1,5 @@
+package memory;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -24,6 +26,14 @@ class Players extends JPanel {
       player = new Player("Player " + "(" + Integer.toString(i) + ")");
       players.add(player);
     }
+  }
+  
+  /**
+   * Returnerar aktiv spelare
+   * @return Spelaren som är aktiv nu
+   */
+  public Player getCurrentPlayer() {
+    return players.get(currentPlayer);
   }
   
   /**
