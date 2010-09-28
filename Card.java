@@ -10,7 +10,7 @@ import javax.swing.JButton;
 class Card extends JButton {
   private int id;
   private String value;
-  private boolean 
+  private boolean flipped;
   
   public Card (int id) {
     this.id = id;
