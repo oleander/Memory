@@ -13,7 +13,7 @@ public class Player extends JButton {
   
   private Color activeColor   = Color.red;
   private Color inactiveColor = Color.gray;
-  private EtchedBorder border = new EtchedBorder();
+  private EtchedBorder border = new EtchedBorder(EtchedBorder.LOWERED);
   
   /**
    * @param name Spelarens namn

@@ -1,17 +1,22 @@
 package memory;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 
+import com.sun.xml.internal.rngom.digested.DInterleavePattern;
+
 /**
  * Ett kort i ett memoryspel
  */
- 
 public class Card extends JButton {
+  // Logiska egenskaper
   private int id;
 	private String value;
 	private State state;
+	
+	// Grafisk egenskaper
 	private EtchedBorder border  = new EtchedBorder();
 	private Color invisibleColor = Color.white;
 	private Color downColor      = Color.darkGray;
