@@ -21,6 +21,9 @@ class Cards extends JPanel implements ActionListener {
   /* Innehåller huvudramen för spelet */
   private Memory creator = null;
   
+  /* Layout för kortarean*/
+  private GridLayout layout;
+  
   /**
   * Konstruktor
   * @paras rows antalet rader som spelplanen ska innehålla
@@ -57,6 +60,10 @@ class Cards extends JPanel implements ActionListener {
     
     /* Blandar listan*/
     Collections.shuffle(this.cards);
+    
+    /* Skapar ett rutnät för korten */
+    
+    layout = new GridLayout(rows, (numOfCards/rows), 2, 2);
     
     /* lägger till kort till vyn */
     for (Card c : cards) {
