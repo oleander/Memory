@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.border.EtchedBorder;
 /**
  * Representerar en spelare. Håller reda på poängställningen. 
@@ -21,12 +22,15 @@ public class Player extends JButton implements ActionListener{
   /**
    * @param name Spelarens namn
    */
-  
   public Player(String name) {
     this.name   = name;
-    this.score  = 0;
-    this.setBorder(border);
+    score  = 0;
+    updateText();
+    setBackground(inactiveColor);
+    setBorder(border);
+    this.addActionListener(this);
   }
+  
   /**
    * Sätter spelaren som aktiv. Ändrar bakgrundsfärgen för att visa det.
    */
@@ -46,9 +50,25 @@ public class Player extends JButton implements ActionListener{
    */
   public void incScore() {
     this.score++;
+    this.updateText();
+  }
+  
+  /**
+   * Ändrar spelarens namn
+   * @param name Spelarens nya namn
+   */
+  public void setName(String name) {
+    this.name = name;
+    updateText();
+  }
+  
+  // Uppdaterar texten på spelarknappen
+  private void updateText() {
+    this.setText(name + " - " + score + " points");
   }
   
   public void actionPerformed(ActionEvent e) {
-    
+    String name = JOptionPane.showInputDialog("Enter a new name:\n");
+    this.setName(name);
   }
 }

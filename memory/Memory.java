@@ -1,5 +1,7 @@
 package memory;
 
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
 class Memory extends JFrame {
@@ -15,18 +17,18 @@ class Memory extends JFrame {
    */
   public Memory() {
     players = new Players(defaultPlayers);
-    cards   = new Cards(defaultCards, defaultRows, this);
+    //cards   = new Cards(defaultCards, defaultRows, this);
     buildView();
   }
   
   /**
    * Skapar ett spel med angivet antal spelare, kort och rader
-   * @param noOfPlayers Antalet spelare
+   * @param numOfPlayers Antalet spelare
    * @param numOfCards Antalet kort
    * @param numOfRows Antalet rader
    */
-  public Memory(int noOfPlayers, int numOfCards, int numOfRows){
-    players = new Players(noOfPlayers);
+  public Memory(int numOfPlayers, int numOfCards, int numOfRows){
+    players = new Players(numOfPlayers);
     cards   = new Cards(numOfCards, numOfRows, this);
     buildView();
   }
@@ -35,12 +37,16 @@ class Memory extends JFrame {
    * Inkrementerar den aktiva spelarens poängställning.
    */
   public void hasScored(){
-    players.getCurrentPlayer().incScore();
-    
+    players.getCurrentPlayer().incScore(); 
   }
   
   private void buildView() {
+    this.setLayout(new BorderLayout());
+    //this.add(cards, BorderLayout.CENTER);
+    this.add(players, BorderLayout.SOUTH);
+    this.add(new JLabel("APA"), BorderLayout.CENTER);
     
+    this.setVisible(true);
   }
   
   /**

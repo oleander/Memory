@@ -1,6 +1,8 @@
 package memory;
 
 import javax.swing.*;
+
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 class Players extends JPanel {
@@ -12,6 +14,7 @@ class Players extends JPanel {
      By default är det alltid första spelaren
   */
   private int currentPlayer = 0;
+  private GridLayout layout;
   
   /**
   * Konstruktor
@@ -20,17 +23,20 @@ class Players extends JPanel {
   * @return none
   */
   public Players(int amountOfPayers){
+    layout = new GridLayout(1, amountOfPayers, 2, 2);
+    this.setLayout(layout);
     Player player = null;
     
     for (int i = 1; i <= amountOfPayers; i++) {
       player = new Player("Player " + "(" + Integer.toString(i) + ")");
       players.add(player);
+      this.add(player);
     }
   }
   
   /**
    * Returnerar aktiv spelare
-   * @return Spelaren som är aktiv nu
+   * @return Aktiv spelare
    */
   public Player getCurrentPlayer() {
     return players.get(currentPlayer);
