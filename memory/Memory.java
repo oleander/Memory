@@ -17,7 +17,7 @@ class Memory extends JFrame {
    */
   public Memory() {
     players = new Players(defaultPlayers);
-    //cards   = new Cards(defaultCards, defaultRows, this);
+    cards   = new Cards(defaultCards, defaultRows, this);
     buildView();
   }
   

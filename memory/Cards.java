@@ -51,15 +51,18 @@ class Cards extends JPanel implements ActionListener {
       /* Lägger till kortet två gånger i listan, 
          eftersom varje bild måste finnas med just två gånger 
       */
-      this.add(card); this.add(card);
       this.cards.add(card); this.cards.add(card);
     }
     
     /* Blandar listan*/
     Collections.shuffle(this.cards);
     
+    for (Card c : cards) {
+      this.add(c);
+    }
+    
     /* Lägger till vår nyligen genererade lista i huvudramen */
-    creator.add(this, BorderLayout.CENTER);
+    // creator.add(this, BorderLayout.CENTER);
   }
   
   /**
@@ -89,10 +92,9 @@ class Cards extends JPanel implements ActionListener {
   * @return none
   */
   public void actionPerformed(ActionEvent e){
-    
     /* Varför måste man göra så här?! */
     Card card = (Card) e.getSource();
-    
+
     /* Vänder på kortet de klickade kortet */
     card.flip();
     
