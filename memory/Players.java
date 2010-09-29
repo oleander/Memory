@@ -51,4 +51,13 @@ class Players extends JPanel {
   public void nextPlayer(){
     this.currentPlayer =  this.players.size() - 1 > this.currentPlayer ? this.currentPlayer + 1 : 0;
   }
+  
+  /**
+  * Retunerar den nuvarnade spelare
+  * @param none
+  * @return Nuvarande spelaren
+  */
+  public Player currentPlayer(){
+    return this.players.get(this.currentPlayer);
+  }
 }

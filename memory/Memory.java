@@ -44,8 +44,8 @@ class Memory extends JFrame {
     this.setLayout(new BorderLayout());
     //this.add(cards, BorderLayout.CENTER);
     this.add(players, BorderLayout.SOUTH);
-    this.add(new JLabel("APA"), BorderLayout.CENTER);
     
+    this.setTitle("Memory");
     this.setVisible(true);
   }
   
@@ -55,12 +55,4 @@ class Memory extends JFrame {
   public void nextPlayer(){
     players.nextPlayer();
   }
-  
-//  public static void main(String[] args){
-//    Memory memory  = new Memory();
-//    Cards cards   = new Cards(10,100,memory);
-//    
-//    memory.add(cards);
-//    memory.setVisible(true);
-//  }
 }

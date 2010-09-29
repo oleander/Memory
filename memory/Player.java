@@ -1,4 +1,5 @@
 package memory;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,7 +10,7 @@ import javax.swing.border.EtchedBorder;
 /**
  * Representerar en spelare. Håller reda på poängställningen. 
  * Spelaren kan vara aktiv eller inaktiv
- * @author jesper
+ * @author jesper <== Vad är det här för roligt :)
  */
 public class Player extends JButton implements ActionListener{
   private int score;
