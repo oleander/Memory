@@ -66,9 +66,6 @@ class Cards extends JPanel implements ActionListener {
     for (Card c : this.cards) {
       this.add(c);
     }
-    System.out.println(this.cards.size());
-    /* Lägger till vår nyligen genererade lista i huvudramen */
-    // creator.add(this, BorderLayout.CENTER);
   }
   
   /**

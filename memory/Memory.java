@@ -39,6 +39,15 @@ class Memory extends JFrame {
   }
   
   private void buildView() {
+    /* Det är denna raden som gör att meyn placeras längst upp i applikationen i OS X */
+    System.setProperty("apple.laf.useScreenMenuBar", "true");
+    
+    /* Skapar en meny för spelet 
+       I OS X visas en OSX-ish variant
+    */
+    Menu menu = new Menu();
+    this.setJMenuBar(menu);
+    
     this.setLayout(new BorderLayout());
     
     /* Skapar en huvudpanel som kommer att innhålla alla andra paneler */
