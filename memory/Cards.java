@@ -1,5 +1,3 @@
-
-
 import javax.swing.*;
 import java.awt.*;  
 import java.awt.event.*;
@@ -78,7 +76,7 @@ class Cards extends JPanel implements ActionListener {
   * @param none
   * @return none
   */
-  private void sleep(Card card){    
+  private void sleep(Card card){
     Timer timer = new Timer(this.sleepTime, card);
     timer.start();
   }

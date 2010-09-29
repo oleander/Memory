@@ -29,6 +29,7 @@ public class Card extends JButton implements ActionListener {
     this.value = value;
     state = State.DOWN;
     this.setBorder(border);
+    this.setBackground(this.downColor);
   }
   
   /**
@@ -41,7 +42,7 @@ public class Card extends JButton implements ActionListener {
   /**
   * Vänder på kortet. Gör inget om det redan är osynligt.
   */
-  public void flip() {    
+  public void flip() {
     if (this.state == State.UP) {
     	this.state = State.DOWN;
     	this.setBackground(this.downColor);
