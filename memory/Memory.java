@@ -20,7 +20,7 @@ class Memory extends JFrame {
    */
   public Memory(int numOfPlayers, int numOfCards, int numOfRows){
     this.players = new Players(numOfPlayers);
-    this.cards   = new Cards(numOfCards, numOfRows, this);
+    this.cards   = new Cards(numOfRows, numOfCards, this);
     buildView();
   }
   
@@ -45,13 +45,13 @@ class Memory extends JFrame {
     JPanel innerPanel = new JPanel();
     innerPanel.setLayout(new BorderLayout());
       
-    innerPanel.add(this.cards, BorderLayout.SOUTH);
+    innerPanel.add(this.cards, BorderLayout.CENTER);
     innerPanel.add(this.players, BorderLayout.NORTH);
     
     this.add(innerPanel);
     this.setTitle("Memory");
     this.setVisible(true);
-    this.setSize(800,800);
+    this.pack();
     this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
   }
   

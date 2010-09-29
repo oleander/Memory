@@ -1,9 +1,5 @@
 class Main {
-  public Main(){
-    
-  }
-  
   public static void main(String[] args){
-    Memory memory = new Memory();
+    Memory memory = new Memory(3,30,3);
   }
 }
