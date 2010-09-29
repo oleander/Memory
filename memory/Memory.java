@@ -5,9 +5,9 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 
 class Memory extends JFrame {
-  private int defaultPlayers  = 2;
-  private int defaultCards    = 100;
-  private int defaultRows     = 10;
+  private static int defaultPlayers  = 2;
+  private static int defaultCards    = 100;
+  private static int defaultRows     = 10;
  
   private Players players;
   private Cards cards;
@@ -16,9 +16,7 @@ class Memory extends JFrame {
    * Defaultkonstruktorn skapar ett spel med två spelare, 100 kort och 10 rader
    */
   public Memory() {
-    players = new Players(defaultPlayers);
-    cards   = new Cards(defaultCards, defaultRows, this);
-    buildView();
+    this(defaultPlayers, defaultCards, defaultRows);
   }
   
   /**
@@ -42,7 +40,7 @@ class Memory extends JFrame {
   
   private void buildView() {
     this.setLayout(new BorderLayout());
-    //this.add(cards, BorderLayout.CENTER);
+    //this.add(cards, BorderLayout.SOUTH);
     this.add(players, BorderLayout.SOUTH);
     
     this.setTitle("Memory");

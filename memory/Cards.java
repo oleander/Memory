@@ -51,12 +51,14 @@ class Cards extends JPanel implements ActionListener {
       /* Lägger till kortet två gånger i listan, 
          eftersom varje bild måste finnas med just två gånger 
       */
+      card.addActionListener(this);
       this.cards.add(card); this.cards.add(card);
     }
     
     /* Blandar listan*/
     Collections.shuffle(this.cards);
     
+    /* lägger till kort till vyn */
     for (Card c : cards) {
       this.add(c);
     }
