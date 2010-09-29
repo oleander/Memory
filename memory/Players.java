@@ -1,4 +1,3 @@
-package memory;
 
 import javax.swing.*;
 

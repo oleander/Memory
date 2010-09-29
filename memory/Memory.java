@@ -1,4 +1,4 @@
-package memory;
+
 
 import java.awt.BorderLayout;
 
@@ -40,13 +40,13 @@ class Memory extends JFrame {
     players.getCurrentPlayer().incScore(); 
   }
   
-  private void buildView() {
-    this.setLayout(new BorderLayout());
+  private void buildView() {    
     //this.add(cards, BorderLayout.CENTER);
-    this.add(players, BorderLayout.SOUTH);
-    
+    this.add(this.players, BorderLayout.SOUTH);
     this.setTitle("Memory");
     this.setVisible(true);
+    this.setSize(800,800);
+    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
   }
   
   /**
