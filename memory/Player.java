@@ -10,7 +10,7 @@ import javax.swing.border.EtchedBorder;
 /**
  * Representerar en spelare. Håller reda på poängställningen. 
  * Spelaren kan vara aktiv eller inaktiv
- * @author jesper <== Vad är det här för roligt :)
+ * @author jesper <== Vad är det här för roligt :) <== haha, eclipse genererar automatiskt! :)
  */
 public class Player extends JButton implements ActionListener{
   private int score;

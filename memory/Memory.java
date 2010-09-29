@@ -5,21 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 
 class Memory extends JFrame {
-  private int defaultPlayers  = 2;
-  private int defaultCards    = 100;
-  private int defaultRows     = 10;
+  private static int defaultPlayers  = 2;
+  private static int defaultCards    = 100;
+  private static int defaultRows     = 10;
  
   private Players players;
   private Cards cards;
-  
-  /**
-   * Defaultkonstruktorn skapar ett spel med två spelare, 100 kort och 10 rader
-   */
-  public Memory() {
-    players = new Players(defaultPlayers);
-    cards   = new Cards(defaultCards, defaultRows, this);
-    buildView();
-  }
   
   /**
    * Skapar ett spel med angivet antal spelare, kort och rader
@@ -28,9 +19,16 @@ class Memory extends JFrame {
    * @param numOfRows Antalet rader
    */
   public Memory(int numOfPlayers, int numOfCards, int numOfRows){
-    players = new Players(numOfPlayers);
-    cards   = new Cards(numOfCards, numOfRows, this);
+    this.players = new Players(numOfPlayers);
+    this.cards   = new Cards(numOfCards, numOfRows, this);
     buildView();
+  }
+  
+  /**
+   * Defaultkonstruktorn skapar ett spel med två spelare, 100 kort och 10 rader
+   */
+  public Memory() {
+    this(defaultPlayers, defaultCards, defaultRows);
   }
   
   /**
@@ -40,9 +38,17 @@ class Memory extends JFrame {
     players.getCurrentPlayer().incScore(); 
   }
   
-  private void buildView() {    
-    //this.add(cards, BorderLayout.CENTER);
-    this.add(this.players, BorderLayout.SOUTH);
+  private void buildView() {
+    this.setLayout(new BorderLayout());
+    
+    /* Skapar en huvudpanel som kommer att innhålla alla andra paneler */
+    JPanel innerPanel = new JPanel();
+    innerPanel.setLayout(new BorderLayout());
+      
+    innerPanel.add(this.cards, BorderLayout.SOUTH);
+    innerPanel.add(this.players, BorderLayout.NORTH);
+    
+    this.add(innerPanel);
     this.setTitle("Memory");
     this.setVisible(true);
     this.setSize(800,800);
