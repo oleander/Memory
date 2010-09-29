@@ -1,7 +1,4 @@
-
-
 import java.awt.BorderLayout;
-
 import javax.swing.*;
 
 class Memory extends JFrame {
