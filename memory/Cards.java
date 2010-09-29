@@ -28,7 +28,6 @@ class Cards extends JPanel implements ActionListener {
   * @param creator  huvudframen för spelplanen
   * @return none
   */
-  
   public Cards(int rows, int numOfCards, Memory creator){
     this.creator = creator;
     this.setLayout(new GridLayout(rows, numOfCards/rows));

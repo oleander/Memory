@@ -1,31 +1,29 @@
-
-
 import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
-
 import javax.swing.*;
 
 /**
- * Ett kort i ett memoryspel
- */
+* Ett kort i ett memoryspel
+*/
 public class Card extends JButton implements ActionListener {
-  // Logiska egenskaper
+  
+  /* Logiska egenskaper */
   private int id;
 	private String value;
 	private State state;
 	
-	// Grafisk egenskaper
+	/* Grafisk egenskaper */
 	private EtchedBorder border  = new EtchedBorder();
 	private Color invisibleColor = Color.white;
 	private Color downColor      = Color.darkGray;
 	private Color upColor        = Color.gray;
   
 	/**
-	 * Skapar ett kort med ansiktet neråt
-	 * @param id - ett unikt id
-	 */
+	* Skapar ett kort med ansiktet neråt
+	* @param id - ett unikt id
+	*/
   public Card (int id, String value) {
     this.id = id;
     this.value = value;
@@ -41,8 +39,8 @@ public class Card extends JButton implements ActionListener {
   }
   
   /**
-   * Vänder på kortet. Gör inget om det redan är osynligt.
-   */
+  * Vänder på kortet. Gör inget om det redan är osynligt.
+  */
   public void flip() {    
     if (this.state == State.UP) {
     	this.state = State.DOWN;
@@ -65,13 +63,18 @@ public class Card extends JButton implements ActionListener {
 	  this.setBackground(invisibleColor);
   }
   
+  /**
+  * Kontrollerar om två kort är lika
+  * @return true om ingående kort har samma värde, alltså text som instansen
+  * @param Ett kort av klassen Card
+  */
   public boolean equals(Card card){
     return this.value.equals(card.value);
   }
   
   /**
-   * Beskriver tillstånden som ett kort kan befinna sig i
-   */
+  * Beskriver tillstånden som ett kort kan befinna sig i
+  */
   public enum State {
     /**
      * Kortet har ansiktet uppåt
