@@ -1,5 +1,3 @@
-package memory;
-
 class Main {
   public Main(){
     

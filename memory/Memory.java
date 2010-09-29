@@ -1,4 +1,4 @@
-package memory;
+
 
 import java.awt.BorderLayout;
 
@@ -13,22 +13,22 @@ class Memory extends JFrame {
   private Cards cards;
   
   /**
-   * Defaultkonstruktorn skapar ett spel med två spelare, 100 kort och 10 rader
-   */
-  public Memory() {
-    this(defaultPlayers, defaultCards, defaultRows);
-  }
-  
-  /**
    * Skapar ett spel med angivet antal spelare, kort och rader
    * @param numOfPlayers Antalet spelare
    * @param numOfCards Antalet kort
    * @param numOfRows Antalet rader
    */
   public Memory(int numOfPlayers, int numOfCards, int numOfRows){
-    players = new Players(numOfPlayers);
-    cards   = new Cards(numOfCards, numOfRows, this);
+    this.players = new Players(numOfPlayers);
+    this.cards   = new Cards(numOfCards, numOfRows, this);
     buildView();
+  }
+  
+  /**
+   * Defaultkonstruktorn skapar ett spel med två spelare, 100 kort och 10 rader
+   */
+  public Memory() {
+    this(defaultPlayers, defaultCards, defaultRows);
   }
   
   /**
@@ -40,11 +40,19 @@ class Memory extends JFrame {
   
   private void buildView() {
     this.setLayout(new BorderLayout());
-    //this.add(cards, BorderLayout.SOUTH);
-    this.add(players, BorderLayout.SOUTH);
     
+    /* Skapar en huvudpanel som kommer att innhålla alla andra paneler */
+    JPanel innerPanel = new JPanel();
+    innerPanel.setLayout(new BorderLayout());
+      
+    innerPanel.add(this.cards, BorderLayout.SOUTH);
+    innerPanel.add(this.players, BorderLayout.NORTH);
+    
+    this.add(innerPanel);
     this.setTitle("Memory");
     this.setVisible(true);
+    this.setSize(800,800);
+    this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
   }
   
   /**
