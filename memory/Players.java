@@ -141,10 +141,14 @@ class Players extends JPanel {
     
     // Sorterar listan så att spelaren med flest poäng är först
     Collections.sort(players, Collections.reverseOrder());
+    
+    // Laddar den första spelaren i listan, vilket bör vara den första med det högsta poängantalet
     firstWinner = players.get(0);
     winners.add(firstWinner);
+    
+    // Alla som har det poängantal som är störst läggs till vinnarlistan
     for (Player p : players) {
-      if (firstWinner.getScore() == p.getScore() ) {
+      if (firstWinner.getScore() == p.getScore() && p != firstWinner) {
         winners.add(p);
       }
     }
