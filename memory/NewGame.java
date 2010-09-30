@@ -105,26 +105,31 @@ public class NewGame {
   private void buildView(){
     window.add(wrapper);
     
+    // Sätter upp layout för huvudrutan och lägger till huvudpanelerna
     wrapper.setLayout(new GridLayout(4, 1, 5, 5));
     wrapper.add(playersPanel);
     wrapper.add(sliderPanel1);
     wrapper.add(sliderPanel2);
     wrapper.add(buttonPanel);
     
+    // Ställer in startknappens text och lägger till den i knappanelen
     initButton.setText(initButtonText);
     buttonPanel.add(initButton);
     
+    // Uppdaterar alla slidervisare och sparar ner värden, så att de ej är null om användaren trycker start direkt
     setMaxAndTicks();
     updateCardLabel();
     updateColRowLabel();
     updatePlayersLabel();
     
+    // Ställer in rubriktexter
     colRowLabel.setText(colRowLabelText);
     cardLabel.setText(cardLabelText);
     playersLabel.setText(playersText);
     
     colRowLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     cardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+    playersLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     
     cardDisplay.setPreferredSize(displaySize);
     colDisplay.setPreferredSize(displaySize);
