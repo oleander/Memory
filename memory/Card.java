@@ -3,12 +3,12 @@ import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.*;
-
+import java.io.*;
 
 /**
 * Ett kort i ett memoryspel
 */
-public class Card extends JButton implements ActionListener {
+public class Card extends JButton implements ActionListener, Serializable{
   
   /* Logiska egenskaper */
   private int id;
@@ -28,7 +28,7 @@ public class Card extends JButton implements ActionListener {
   public Card (int id, String value) {
     this.id = id;
     this.value = value;
-    state = State.DOWN;
+    this.state = State.DOWN;
     this.setBorder(border);
     this.setBackground(this.downColor);
   }
@@ -63,6 +63,7 @@ public class Card extends JButton implements ActionListener {
   public void remove() {
 	  this.state = State.INVISIBLE;
 	  this.setBackground(invisibleColor);
+	  this.setText("");
   }
   
   /**
@@ -96,8 +97,24 @@ public class Card extends JButton implements ActionListener {
   * Är kortet uppåt?
   * @return Retunerar true om kortet är up, en bild visas alltså
   */
-  public boolean isUp(){
+  public boolean isUp() {
     return this.state == State.UP;
+  }
+  
+  public Card clone(){
+    Card card = new Card(this.id, this.value);
+    
+    card.state = this.state;
+    card.setBorder(this.border);
+    
+    if(this.state == State.INVISIBLE){
+      card.setBackground(this.invisibleColor);
+      card.setText("");
+    } else {
+      card.setBackground(this.downColor);
+    }
+    
+    return card;
   }
   
   /**

@@ -19,6 +19,7 @@ class Memory extends JFrame {
     this.players = new Players(numOfPlayers);
     this.cards   = new Cards(numOfRows, numOfCards, this);
     buildView();
+    
   }
   
   /**
@@ -42,7 +43,7 @@ class Memory extends JFrame {
     /* Skapar en meny för spelet 
        I OS X visas en OSX-ish variant
     */
-    Menu menu = new Menu();
+    Menu menu = new Menu(this);
     this.setJMenuBar(menu);
     
     this.setLayout(new BorderLayout());
@@ -66,5 +67,17 @@ class Memory extends JFrame {
    */
   public void nextPlayer(){
     players.nextPlayer();
+  }
+
+  public void load(){
+    this.cards.load();
+    this.players.load();
+    this.validate();
+    this.pack();
+  }
+  
+  public void save(){
+    this.cards.save();
+    this.players.save();
   }
 }

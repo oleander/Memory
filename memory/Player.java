@@ -33,6 +33,18 @@ public class Player extends JButton implements ActionListener{
   }
   
   /**
+  * Skapar en kopia på en spelare
+  * @return En kopia på en spelare
+  */
+  public Player clone(){
+    Player player = new Player(this.name);
+    player.score = this.score;
+    player.setBackground(this.getBackground());
+    player.updateText();
+    return player;
+  }
+  
+  /**
    * Sätter spelaren som aktiv. Ändrar bakgrundsfärgen för att visa det.
    */
   public void setActive() {
