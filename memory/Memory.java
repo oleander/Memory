@@ -2,16 +2,16 @@ package memory;
 
 import java.awt.BorderLayout;
 import java.util.ArrayList;
-
 import javax.swing.*;
 
 class Memory extends JFrame {
   private static int defaultPlayers  = 2;
-  private static int defaultCards    = 100;
-  private static int defaultRows     = 10;
+  private static int defaultCards    = 20;
+  private static int defaultRows     = 4;
  
   private Players players;
   private Cards cards;
+  private JPanel innerPanel;
   
   /**
    * Skapar ett spel med angivet antal spelare, kort och rader
@@ -21,7 +21,7 @@ class Memory extends JFrame {
    */
   public Memory(int numOfPlayers, int numOfCards, int numOfRows){
     this.players = new Players(numOfPlayers);
-    this.cards   = new Cards(numOfCards, numOfRows, this);
+    this.cards   = new Cards(numOfRows, numOfCards, this);
     buildView();
   }
   
@@ -36,23 +36,32 @@ class Memory extends JFrame {
    * Inkrementerar den aktiva spelarens poängställning.
    */
   public void hasScored(){
-    players.getCurrentPlayer().incScore(); 
+    players.currentPlayer().incScore(); 
   }
   
   private void buildView() {
+    /* Det är denna raden som gör att menyn placeras längst upp i applikationen i OS X */
+    System.setProperty("apple.laf.useScreenMenuBar", "true");
+    
+    /* Skapar en meny för spelet 
+       I OS X visas en OSX-ish variant
+    */
+    Menu menu = new Menu(this);
+    this.setJMenuBar(menu);
+    
     this.setLayout(new BorderLayout());
     
     /* Skapar en huvudpanel som kommer att innhålla alla andra paneler */
-    JPanel innerPanel = new JPanel();
-    innerPanel.setLayout(new BorderLayout());
+    this.innerPanel = new JPanel();
+    this.innerPanel.setLayout(new BorderLayout());
       
-    innerPanel.add(this.cards, BorderLayout.SOUTH);
-    innerPanel.add(this.players, BorderLayout.NORTH);
+    this.innerPanel.add(this.cards, BorderLayout.CENTER);
+    this.innerPanel.add(this.players, BorderLayout.SOUTH);
     
     this.add(innerPanel);
     this.setTitle("Memory");
     this.setVisible(true);
-    this.setSize(800,800);
+    this.pack();
     this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
   }
   
@@ -63,10 +72,10 @@ class Memory extends JFrame {
     players.nextPlayer();
   }
   
-  /**
+  /*
    * Körs när spelet är slut. Visar en dialog som meddelar vem eller vilka som vann. 
    */
-  public void gameEnded(){
+  protected void gameEnded(){
     ArrayList<Player> winners = players.getWinners();
     if (winners.size() == 1) {
       JOptionPane.showMessageDialog(null, "Game ended!\nThe winner is: " + players.getWinners().get(0).getName());
@@ -76,13 +85,17 @@ class Memory extends JFrame {
         message += ("\n" + p.getName()); 
       }
       JOptionPane.showMessageDialog(null, message);
-      }
-    
+    }
     NewGame newGame = new NewGame(this);
   }
   
-  public void initialize(int numOfPlayers, int numOfCards, int numOfRows){
+  protected void initialize(int numOfPlayers, int numOfCards, int numOfRows){
+    this.innerPanel.removeAll();
     this.players = new Players(numOfPlayers);
-    this.cards   = new Cards(numOfCards, numOfRows, this);
+    this.cards   = new Cards(numOfRows, numOfCards, this);
+    this.innerPanel.add(players, BorderLayout.SOUTH);
+    this.innerPanel.add(cards, BorderLayout.CENTER);
+    this.validate();
+    this.pack();
   }
 }

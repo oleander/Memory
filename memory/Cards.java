@@ -19,7 +19,7 @@ class Cards extends JPanel implements ActionListener {
   private Card activeCard = null;
   
   /* Hur länge ska vi sova? , i ms */
-  private int sleepTime = 3000;
+  private int sleepTime = 1000;
   
   /* Innehåller huvudramen för spelet */
   private Memory creator = null;
@@ -37,61 +37,58 @@ class Cards extends JPanel implements ActionListener {
   * @param creator  huvudframen för spelplanen
   * @return none
   */
-  
   public Cards(int rows, int numOfCards, Memory creator){
     this.creator    = creator;
     this.numOfCards = numOfCards;
     this.invisible  = 0;
+    this.setLayout(new GridLayout(rows, numOfCards/rows));
     
     char digit;
     Card card = null;
-    
+    Card card2 = null;
     /* Här börjar alla roliga tecken */
     int startValue = 161;
-    
     for (int i = startValue; i < (startValue + numOfCards/2); i++) {
       
       /* Översätter nuvarande siffran till en char */
       digit = (char) i;
       
+      /* En något otorr kod 
+         Behöver städas upp vid tillfälle */
+      
       /* Skickar med ett unikt värde i form av en tal 
-         Sätter texten på knappen, i det här fallet så används ASCII-koden för {i} som namn
-      */
-      card = new Card(i, Character.toString(digit));
+         Sätter texten på knappen, i det här fallet så används ASCII-koden för {i} som namn */
+      card = new Card(i*i, Character.toString(digit));
+      card2 = new Card(i*i, Character.toString(digit));
       
       /* Lägger till kortet två gånger i listan, 
-         eftersom varje bild måste finnas med just två gånger 
-      */
+         eftersom varje bild måste finnas med just två gånger */
       card.addActionListener(this);
-      this.cards.add(card); this.cards.add(card);
+      card2.addActionListener(this);
+      
+      card.setPreferredSize(new Dimension(35,35));
+      card2.setPreferredSize(new Dimension(35,35));
+      
+      this.cards.add(card); this.cards.add(card2);
     }
     
-    /* Blandar listan*/
+    /* Blandar listan */
     Collections.shuffle(this.cards);
     
-    /* Skapar ett rutnät för korten */
-    
-    layout = new GridLayout(rows, (numOfCards/rows), 2, 2);
-    
-    /* lägger till kort till vyn */
-    for (Card c : cards) {
+    /* Lägger till kort till vyn */
+    for (Card c : this.cards) {
       this.add(c);
     }
-    
-    /* Lägger till vår nyligen genererade lista i huvudramen */
-    // creator.add(this, BorderLayout.CENTER);
   }
   
   /**
-  * Låter den nuvarande tråden sova ett par sekunder
   * Exakt hur många anges i sleepTime-var
   * @param none
   * @return none
   */
-  private void sleep(){
-    try {
-      Thread.currentThread().sleep(this.sleepTime);
-    } catch (Exception e){}
+  private void sleep(Card card){
+    Timer timer = new Timer(this.sleepTime, card);
+    timer.start();
   }
   
   /**
@@ -111,6 +108,11 @@ class Cards extends JPanel implements ActionListener {
   public void actionPerformed(ActionEvent e){
     /* Varför måste man göra så här?! */
     Card card = (Card) e.getSource();
+    
+    /* Är kortet redan vänt? */
+    if(card.isUp()){
+      return;
+    }
 
     /* Vänder på kortet de klickade kortet */
     card.flip();
@@ -121,18 +123,26 @@ class Cards extends JPanel implements ActionListener {
       return;
     }
     
-    /* Sover i angivet antal sekunder */
-    this.sleep();
-    
-    /* Har första kortet samma värde som det nuvarande?
+    /* Har första kortet samma värde som det nuvarande ?
      * Då har spelaren fått ett poäng och paret görs osynligt.
-     * */
+     */
     if(this.activeCard.equals(card)){
+      /* Ger poäng till användaren */
       creator.hasScored();
+      
+      /* Ta bort båda korten */
       card.remove();
       this.activeCard.remove();
+      
+      /* Registrera antalet osynliga kort */
       this.invisible += 2;
     } else {
+      
+      /* Vänder tillbaka båda korten, om några sekunder... */
+      this.sleep(card);
+      this.sleep(this.activeCard);
+      
+      /* Byter till nästa spelare */
       creator.nextPlayer();
     }
     
@@ -140,9 +150,10 @@ class Cards extends JPanel implements ActionListener {
     
     if (this.invisible == this.numOfCards) {
       creator.gameEnded();
+      return;
     }
     
     /* Nollställer de aktiva kortet för nästa omgång */
-    this.activeCard = null;
+    this.activeCard = null;    
   }
 }

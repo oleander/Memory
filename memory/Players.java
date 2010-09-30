@@ -33,6 +33,9 @@ class Players extends JPanel {
       players.add(player);
       this.add(player);
     }
+    
+    /* */
+    this.currentPlayer().setActive();
   }
   
   /**
@@ -42,7 +45,9 @@ class Players extends JPanel {
   * @return none
   */
   public void nextPlayer(){
+    this.currentPlayer().setInactive();
     this.currentPlayer =  this.players.size() - 1 > this.currentPlayer ? this.currentPlayer + 1 : 0;
+    this.currentPlayer().setActive();
   }
   
   /**
