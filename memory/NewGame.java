@@ -39,26 +39,39 @@ public class NewGame {
   private Memory creator;
   
   // rad- och kolumnvisarnas defaultstorlek
-  private Dimension labelSize     = new Dimension(60, 16);
+  private Dimension displaySize     = new Dimension(60, 16);
+  private Dimension placeholderSize = new Dimension(60, 0);
   
   /* Grafiska komponenter */
   private JFrame window           = new JFrame(windowTitle);
   private JPanel wrapper          = new JPanel();
+  
+  // Paneler som innehåller rubriker och sliderpaket
   private JPanel playersPanel     = new JPanel();
   private JPanel sliderPanel1     = new JPanel();
   private JPanel sliderPanel2     = new JPanel();
+  
+  // Paneler som innehåller sliders och tillhörande visare
   private JPanel sliderAndLabel1  = new JPanel();
   private JPanel sliderAndLabel2  = new JPanel();
   private JPanel sliderAndLabel3  = new JPanel();
+  
+  // Panel för start-knappen
   private JPanel buttonPanel      = new JPanel();
+  
+  // Sliders
   private JSlider playerSlider    = new JSlider();
   private JSlider cardSlider      = new JSlider();
   private JSlider colRowSlider    = new JSlider();
-  private JLabel playersLabel     = new JLabel();
+  
+  // Displayer visare slidervärden
   private JLabel playersDisplay   = new JLabel();
   private JLabel cardDisplay      = new JLabel();
   private JLabel rowDisplay       = new JLabel();
   private JLabel colDisplay       = new JLabel();
+  
+  // Labels med rubriker
+  private JLabel playersLabel     = new JLabel();
   private JLabel cardLabel        = new JLabel();
   private JLabel colRowLabel      = new JLabel();
   private JLabel placeHolder      = new JLabel();
@@ -113,11 +126,11 @@ public class NewGame {
     colRowLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     cardLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     
-    cardDisplay.setPreferredSize(labelSize);
-    colDisplay.setPreferredSize(labelSize);
-    rowDisplay.setPreferredSize(labelSize);
-    placeHolder.setPreferredSize(labelSize);
-    playersDisplay.setPreferredSize(labelSize);
+    cardDisplay.setPreferredSize(displaySize);
+    colDisplay.setPreferredSize(displaySize);
+    rowDisplay.setPreferredSize(displaySize);
+    placeHolder.setPreferredSize(displaySize);
+    playersDisplay.setPreferredSize(displaySize);
     
     rowDisplay.setHorizontalAlignment(JLabel.RIGHT);
     
@@ -128,7 +141,6 @@ public class NewGame {
     
     sliderPanel1.setLayout(new BoxLayout(sliderPanel1, BoxLayout.Y_AXIS));
     sliderPanel1.setBorder(new EtchedBorder());
-    sliderPanel1.add(placeHolder);
     sliderPanel1.add(cardLabel);
     sliderPanel1.add(sliderAndLabel1);
     
@@ -138,7 +150,7 @@ public class NewGame {
     sliderPanel2.add(sliderAndLabel2);
     
     sliderAndLabel1.setLayout(flow);
-    sliderAndLabel1.add(placeHolder);
+    sliderAndLabel1.add(Box.createRigidArea(placeholderSize));
     sliderAndLabel1.add(cardSlider);
     sliderAndLabel1.add(cardDisplay);
     
@@ -148,7 +160,7 @@ public class NewGame {
     sliderAndLabel2.add(colDisplay);
     
     sliderAndLabel3.setLayout(flow);
-    sliderAndLabel3.add(Box.createRigidArea(labelSize));
+    sliderAndLabel3.add(Box.createRigidArea(placeholderSize));
     sliderAndLabel3.add(playerSlider);
     sliderAndLabel3.add(playersDisplay);
  
