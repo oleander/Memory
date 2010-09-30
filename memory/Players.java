@@ -71,7 +71,7 @@ class Players extends JPanel {
     firstWinner = players.get(0);
     winners.add(firstWinner);
     for (Player p : players) {
-      if (firstWinner.getScore() == p.getScore() ) {
+      if (firstWinner.getScore() == p.getScore() && p != firstWinner) {
         winners.add(p);
       }
     }

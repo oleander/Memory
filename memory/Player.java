@@ -85,6 +85,14 @@ public class Player extends JButton implements ActionListener, Comparable {
   }
   
   /**
+   * @return Spelarens namn
+   */
+  
+  public String getName() {
+    return this.name;
+  }
+  
+  /**
    * Jämför två Player. Om argumentet inte är en player slängs en exception.
    * @param o Objektet som man vill jämföra this med.
    * @returns en int som jämför objekten
