@@ -95,12 +95,16 @@ public class Card extends JButton implements ActionListener, Serializable{
   
   /**
   * Är kortet uppåt?
-  * @return Retunerar true om kortet är up, en bild visas alltså
+  * @return Returnerar true om kortet är up, en bild visas alltså
   */
   public boolean isUp() {
     return this.state == State.UP;
   }
   
+  /**
+  * Skapar en klon av kortet
+  * @return ett objekt av typen Card
+  */
   public Card clone(){
     Card card = new Card(this.id, this.value);
     
@@ -139,5 +143,13 @@ public class Card extends JButton implements ActionListener, Serializable{
    
    /* Flippar tillbaka kortet */
    this.flip();
+  }
+  
+  /**
+  * Är kortet synligt ?
+  * @return True om kortet är synligt
+  */
+  public boolean isInvisible(){
+    return this.state == State.INVISIBLE;
   }
 }

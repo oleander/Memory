@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.io.*;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 
 class Players extends JPanel {
   
@@ -61,16 +62,25 @@ class Players extends JPanel {
       	this.players = (ArrayList<Player>) obj;
         for(Player player : this.players){
           this.add(player);
+          /* Är spelaren aktiv ? */
+          if(player.isActive()){
+            
+            /* Sätter spelaren som aktiv */
+            this.setCurrentPlayer(this.players.indexOf(player));
+          }
         }
       }
-      
     } catch(Exception error){
       error.printStackTrace();
     }
   }
   
+  public void setCurrentPlayer(int i){
+    this.currentPlayer = i;
+  }
+  
   /**
-  * Sparar undan player-delen av spelet i en fil
+  * Sparar undan var-delen av spelet i en fil
   * @param none
   * @return none
   */
@@ -114,11 +124,31 @@ class Players extends JPanel {
   }
   
   /**
-  * Retunerar den nuvarnade spelare
+  * Returnerar den nuvarnade spelare
   * @param none
   * @return Nuvarande spelaren
   */
   public Player currentPlayer(){
     return this.players.get(this.currentPlayer);
   }
+  
+  /**
+   * @return Alla spelare med mest poäng.
+   */
+  public ArrayList<Player> getWinners() {
+    Player firstWinner;
+    ArrayList<Player> winners = new ArrayList<Player>();
+    
+    // Sorterar listan så att spelaren med flest poäng är först
+    Collections.sort(players, Collections.reverseOrder());
+    firstWinner = players.get(0);
+    winners.add(firstWinner);
+    for (Player p : players) {
+      if (firstWinner.getScore() == p.getScore() ) {
+        winners.add(p);
+      }
+    }
+    return winners;
+  }
+  
 }

@@ -6,21 +6,24 @@ import java.awt.event.*;
 * Menyn för applikationen
 */
 class Menu extends JMenuBar implements ActionListener {
+  Memory creator;
   
   /**
   * Konstruktor, no shit
   * @param, none
   * @return none
   */
-  public Menu(Memory memory){
+  public Menu(Memory creator) {
+    this.creator = creator;
+    
     JMenu menu = new JMenu("Game"); 
     
     /* Innehållet i menyn */
     JMenuItem itemNew  = new JMenuItem("New");
     JMenuItem itemQuit = new JMenuItem("Quit");
     
-    Save itemSave = new Save("Save", memory);
-    Load itemLoad = new Load("Load", memory);
+    Save itemSave = new Save("Save", this.creator);
+    Load itemLoad = new Load("Load", this.creator);
     
     itemQuit.addActionListener(this); 
     itemNew.addActionListener(this);
@@ -44,7 +47,11 @@ class Menu extends JMenuBar implements ActionListener {
 	  } else if (e.getActionCommand().equals("Save")) {
 	    System.out.println("Spara");
 	  } else {
-	    System.out.println("Du har nu skapat ett ny spel, eller?");
+	    newGame();
 	  }
+  }
+  
+  private void newGame() {
+    NewGame newGame = new NewGame(creator);
   }
 }

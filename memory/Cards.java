@@ -12,6 +12,9 @@ class Cards extends JPanel implements ActionListener, Serializable {
   /* En lista med kort för den nyvarande spelplanen */
   private ArrayList<Card> cards = new ArrayList<Card>();
   
+  /* Antalet kort */
+  private int numOfCards;
+  
   /* Innehåller det nuvarande kortet för ett spel */
   private Card activeCard = null;
   
@@ -21,6 +24,18 @@ class Cards extends JPanel implements ActionListener, Serializable {
   /* Innehåller huvudramen för spelet */
   private Memory creator = null;
   
+  /* Layout för kortarean*/
+  private GridLayout layout;
+  
+  /* Antalet osynliga kort */
+  private int invisible;
+  
+  /* Antalet rader i applikationen */
+  private int rows = 0;
+  
+  /* Antalet kort i applikationen */
+  private int numCards = 0;
+  
   /**
   * Konstruktor
   * @paras rows antalet rader som spelplanen ska innehålla
@@ -29,9 +44,11 @@ class Cards extends JPanel implements ActionListener, Serializable {
   * @return none
   */
   public Cards(int rows, int numOfCards, Memory creator){
-    this.creator = creator;
-    
-    this.setLayout(new GridLayout(rows, numOfCards/rows));
+    this.creator    = creator;
+    this.numOfCards = numOfCards;
+    this.invisible  = 0;
+    this.rows = rows;
+    this.numOfCards = numOfCards;
     
     char digit;
     Card card = null;
@@ -61,7 +78,6 @@ class Cards extends JPanel implements ActionListener, Serializable {
     this.update();
   }
   
-  
   public void update(){
     /* Plockar bort alla gamla element från listan */
   	this.removeAll();
@@ -71,8 +87,13 @@ class Cards extends JPanel implements ActionListener, Serializable {
       c.setPreferredSize(new Dimension(35,35));
       c.validate();
       this.add(c);
+      if(c.isInvisible()){
+        System.out.println("INC");
+        this.invisible++;
+      }
     }
     
+    this.setLayout(new GridLayout(this.rows, this.numOfCards/this.rows));
     this.validate();
   }
   /**
@@ -170,7 +191,9 @@ class Cards extends JPanel implements ActionListener, Serializable {
       return;
     }
     
-    /* Har första kortet samma värde som det nuvarande ?*/
+    /* Har första kortet samma värde som det nuvarande ?
+     * Då har spelaren fått ett poäng och paret görs osynligt.
+     */
     if(this.activeCard.equals(card)){
       /* Ger poäng till användaren */
       creator.hasScored();
@@ -178,6 +201,9 @@ class Cards extends JPanel implements ActionListener, Serializable {
       /* Ta bort båda korten */
       card.remove();
       this.activeCard.remove();
+      
+      /* Registrera antalet osynliga kort */
+      this.invisible += 2;
     } else {
       
       /* Vänder tillbaka båda korten, om några sekunder... */
@@ -186,6 +212,13 @@ class Cards extends JPanel implements ActionListener, Serializable {
       
       /* Byter till nästa spelare */
       creator.nextPlayer();
+    }
+    
+    /* Om alla kort är osynliga är spelet slut. */
+    
+    if (this.invisible == this.numOfCards) {
+      creator.gameEnded();
+      return;
     }
     
     /* Nollställer de aktiva kortet för nästa omgång */
