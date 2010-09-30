@@ -1,4 +1,4 @@
-
+package memory;
 
 import javax.swing.*;
 import java.awt.*;  
@@ -12,6 +12,9 @@ class Cards extends JPanel implements ActionListener {
   /* En lista med kort för den nyvarande spelplanen */
   private ArrayList<Card> cards = new ArrayList<Card>();
   
+  /* Antalet kort */
+  private int numOfCards;
+  
   /* Innehåller det nuvarande kortet för ett spel */
   private Card activeCard = null;
   
@@ -24,6 +27,9 @@ class Cards extends JPanel implements ActionListener {
   /* Layout för kortarean*/
   private GridLayout layout;
   
+  /* Antalet osynliga kort */
+  private int invisible;
+  
   /**
   * Konstruktor
   * @paras rows antalet rader som spelplanen ska innehålla
@@ -33,7 +39,9 @@ class Cards extends JPanel implements ActionListener {
   */
   
   public Cards(int rows, int numOfCards, Memory creator){
-    this.creator = creator;
+    this.creator    = creator;
+    this.numOfCards = numOfCards;
+    this.invisible  = 0;
     
     char digit;
     Card card = null;
@@ -116,11 +124,22 @@ class Cards extends JPanel implements ActionListener {
     /* Sover i angivet antal sekunder */
     this.sleep();
     
-    /* Har första kortet samma värde som det nuvarande ?*/
+    /* Har första kortet samma värde som det nuvarande?
+     * Då har spelaren fått ett poäng och paret görs osynligt.
+     * */
     if(this.activeCard.equals(card)){
       creator.hasScored();
+      card.remove();
+      this.activeCard.remove();
+      this.invisible += 2;
     } else {
       creator.nextPlayer();
+    }
+    
+    /* Om alla kort är osynliga är spelet slut. */
+    
+    if (this.invisible == this.numOfCards) {
+      creator.gameEnded();
     }
     
     /* Nollställer de aktiva kortet för nästa omgång */

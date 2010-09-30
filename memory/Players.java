@@ -1,8 +1,10 @@
+package memory;
 
 import javax.swing.*;
 
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.Collections;
 
 class Players extends JPanel {
   
@@ -34,14 +36,6 @@ class Players extends JPanel {
   }
   
   /**
-   * Returnerar aktiv spelare
-   * @return Aktiv spelare
-   */
-  public Player getCurrentPlayer() {
-    return players.get(currentPlayer);
-  }
-  
-  /**
   * Hoppar till nästa spelare, om det finns något
   * Om vi är i slutet av listan så hoppar vi till början igen
   * @param none
@@ -52,11 +46,31 @@ class Players extends JPanel {
   }
   
   /**
-  * Retunerar den nuvarnade spelare
+  * Returnerar den nuvarnade spelare
   * @param none
   * @return Nuvarande spelaren
   */
   public Player currentPlayer(){
     return this.players.get(this.currentPlayer);
   }
+  
+  /**
+   * @return Alla spelare med mest poäng.
+   */
+  public ArrayList<Player> getWinners() {
+    Player firstWinner;
+    ArrayList<Player> winners = new ArrayList<Player>();
+    
+    // Sorterar listan så att spelaren med flest poäng är först
+    Collections.sort(players, Collections.reverseOrder());
+    firstWinner = players.get(0);
+    winners.add(firstWinner);
+    for (Player p : players) {
+      if (firstWinner.getScore() == p.getScore() ) {
+        winners.add(p);
+      }
+    }
+    return winners;
+  }
+  
 }

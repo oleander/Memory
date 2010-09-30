@@ -1,4 +1,4 @@
-
+package memory;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -12,7 +12,7 @@ import javax.swing.border.EtchedBorder;
  * Spelaren kan vara aktiv eller inaktiv
  * @author jesper <== Vad är det här för roligt :) <== haha, eclipse genererar automatiskt! :)
  */
-public class Player extends JButton implements ActionListener{
+public class Player extends JButton implements ActionListener, Comparable {
   private int score;
   private String name;
   
@@ -68,8 +68,40 @@ public class Player extends JButton implements ActionListener{
     this.setText(name + " - " + score + " points");
   }
   
+  /**
+   * När användaren klickar på knappen visas en ändra namn-dialog.
+   */
   public void actionPerformed(ActionEvent e) {
     String name = JOptionPane.showInputDialog("Enter a new name:\n");
-    this.setName(name);
+    if (name != null) {
+      this.setName(name);
+    }
+  }
+  
+  /**
+   * @return Spelarens poäng.
+   */
+  public int getScore() {
+    return this.score;
+  }
+  
+  /**
+   * Jämför två Player. Om argumentet inte är en player slängs en exception.
+   * @param o Objektet som man vill jämföra this med.
+   * @returns en int som jämför objekten
+   */
+  public int compareTo(Object o) {
+    int result;
+    if (o instanceof Player) {
+      Player other = (Player) o;
+      if (this.getScore() == other.getScore()) {
+        result = 0;
+      } else {
+      result = this.getScore() > other.getScore() ? 1 : -1;
+      }
+      return result;
+    } else {
+      throw new ClassCastException();
+    }
   }
 }

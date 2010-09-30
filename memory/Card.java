@@ -1,4 +1,4 @@
-
+package memory;
 
 import java.awt.Color;
 
@@ -60,6 +60,7 @@ public class Card extends JButton {
   public void remove() {
 	  this.state = State.INVISIBLE;
 	  this.setBackground(invisibleColor);
+	  this.setText("");
   }
   
   public boolean equals(Object a){

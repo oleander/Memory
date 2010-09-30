@@ -1,6 +1,7 @@
-
+package memory;
 
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -60,5 +61,28 @@ class Memory extends JFrame {
    */
   public void nextPlayer(){
     players.nextPlayer();
+  }
+  
+  /**
+   * Körs när spelet är slut. Visar en dialog som meddelar vem eller vilka som vann. 
+   */
+  public void gameEnded(){
+    ArrayList<Player> winners = players.getWinners();
+    if (winners.size() == 1) {
+      JOptionPane.showMessageDialog(null, "Game ended!\nThe winner is: " + players.getWinners().get(0).getName());
+    } else {
+      String message = "Game ended in a draw!\nThe winners are:";
+      for (Player p : winners) {
+        message += ("\n" + p.getName()); 
+      }
+      JOptionPane.showMessageDialog(null, message);
+      }
+    
+    NewGame newGame = new NewGame(this);
+  }
+  
+  public void initialize(int numOfPlayers, int numOfCards, int numOfRows){
+    this.players = new Players(numOfPlayers);
+    this.cards   = new Cards(numOfCards, numOfRows, this);
   }
 }
