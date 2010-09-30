@@ -89,10 +89,16 @@ class Memory extends JFrame {
     NewGame newGame = new NewGame(this);
   }
   
+  // Startar ett nytt spel
   protected void initialize(int numOfPlayers, int numOfCards, int numOfRows){
+    // Tar bort alla nuvarande fönster på spelplanen
     this.innerPanel.removeAll();
+    
+    // Lägger till nya spelare och kort
     this.players = new Players(numOfPlayers);
     this.cards   = new Cards(numOfRows, numOfCards, this);
+    
+    // lägger till de nya panelerna och uppdaterar
     this.innerPanel.add(players, BorderLayout.SOUTH);
     this.innerPanel.add(cards, BorderLayout.CENTER);
     this.validate();
