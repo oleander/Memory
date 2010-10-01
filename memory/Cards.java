@@ -1,3 +1,5 @@
+package memory;
+
 import javax.swing.*;
 import java.awt.*;  
 import java.awt.event.*;
@@ -27,8 +29,9 @@ class Cards extends JPanel implements ActionListener, Serializable {
   /* Innehåller huvudramen för spelet */
   private Memory creator = null;
   
-  /* Layout för kortarean*/
+  /* Grafiska egenskaper */
   private GridLayout layout;
+  private EmptyBorder border = new EmptyBorder(20, 32, 20, 32);
   
   /* Antalet osynliga kort */
   private int invisible;
@@ -103,6 +106,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
     }
     
     this.setLayout(new GridLayout(this.rows, this.numOfCards/this.rows));
+    this.setBorder(border);
     this.validate();
   }
   

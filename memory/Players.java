@@ -1,10 +1,14 @@
+package memory;
+
 import javax.swing.*;
 import java.io.*;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 
 class Players extends JPanel {
+  private static final int prefHeight = 30;  
   
   /* Innehåller en lista med alla nuvarande spelare */
   private ArrayList<Player> players = new ArrayList<Player>();
@@ -13,7 +17,10 @@ class Players extends JPanel {
      By default är det alltid första spelaren
   */
   private int currentPlayer = 0;
+  
+  /* Grafiska egenskaper */
   private GridLayout layout;
+  private Dimension prefSize   = new Dimension(100, prefHeight);
   
   /**
   * Konstruktor
@@ -22,8 +29,9 @@ class Players extends JPanel {
   * @return none
   */
   public Players(int amountOfPayers){
-    layout = new GridLayout(1, amountOfPayers, 2, 2);
+    layout = new GridLayout(1, amountOfPayers, 3, 3);
     this.setLayout(layout);
+    this.setPreferredSize(prefSize);
     Player player = null;
     
     for (int i = 1; i <= amountOfPayers; i++) {

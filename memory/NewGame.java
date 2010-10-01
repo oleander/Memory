@@ -1,3 +1,5 @@
+package memory;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -21,6 +23,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NewGame {
+  private static int defaultPlayers = 2;
+  private static int maxPlayers = 10;
+  private static int defaultCards = 20;
+  private static int defaultRows = 5;
+  
   private String windowTitle      = "Create New Game";
   private String initButtonText   = "Start";
   private String playersText      = "Choose the number of players:";
@@ -82,22 +89,30 @@ public class NewGame {
   
   public NewGame(Memory creator, int maxCards) {
     this.creator = creator;
-    
+    this.maxCards = maxCards;
     // Ett första värde sätts på row för att den inte ska vara tom.
-    this.rows    = 50;
+    this.rows = 50;
     
+    setSliderParams();
+    
+    // Bygger vyn och alla lyssnare
+    buildView();
+    addListeners();
+  }
+  
+  private void setSliderParams() {
     // Sätter kortsliderns maxvärde enligt maxantal kort, ser till att slidern bara antar jämna helvärden
     cardSlider.setMaximum(maxCards);
     cardSlider.setMinimum(2);
     cardSlider.setMinorTickSpacing(2);
     cardSlider.setSnapToTicks(true);
+    cardSlider.setValue(defaultCards);
     
-    playerSlider.setMaximum(10);
+    playerSlider.setMaximum(maxPlayers);
     playerSlider.setMinimum(2);
+    playerSlider.setValue(defaultPlayers);
     
-    // Bygger vyn och alla lyssnare
-    buildView();
-    addListeners();
+    colRowSlider.setValue(defaultRows);
   }
   
   private void buildView(){

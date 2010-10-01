@@ -1,11 +1,21 @@
+package memory;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
+/**
+* Innehåller ramen för spelet
+*/
 class Memory extends JFrame {
   private static int defaultPlayers  = 2;
   private static int defaultCards    = 20;
   private static int defaultRows     = 4;
+  private static Dimension minSize  = new Dimension(500, 0);
+  private Toolkit toolkit = Toolkit.getDefaultToolkit();
+  private Dimension screenSize = toolkit.getScreenSize();
  
   private Players players;
   private Cards cards;
@@ -20,6 +30,8 @@ class Memory extends JFrame {
   public Memory(int numOfPlayers, int numOfCards, int numOfRows){
     this.players = new Players(numOfPlayers);
     this.cards   = new Cards(numOfRows, numOfCards, this);
+    this.setLocation((screenSize.width/2 - this.getWidth()/2), (screenSize.height/2 - this.getHeight()/2));
+    this.setMinimumSize(minSize);
     buildView();
   }
   
@@ -74,7 +86,7 @@ class Memory extends JFrame {
   public void nextPlayer(){
     players.nextPlayer();
   }
-
+  
   /**
   * Laddar in korten och alla spelare från externa filer
   * Uppdaterar sedan vyn och packar om ramen
@@ -87,8 +99,8 @@ class Memory extends JFrame {
   }
   
   /**
-  * Sparar undran de nyvarande spelet i form av spelare och kort
-  */
+   * Sparar det nuvarande speltillståndet.
+   */
   public void save(){
     this.cards.save();
     this.players.save();
@@ -123,6 +135,11 @@ class Memory extends JFrame {
     // lägger till de nya panelerna och uppdaterar
     this.innerPanel.add(players, BorderLayout.SOUTH);
     this.innerPanel.add(cards, BorderLayout.CENTER);
+    this.updateView();
+  }
+  
+  /* Packar om och uppdaterar vyn */
+  private void updateView() {
     this.validate();
     this.pack();
   }

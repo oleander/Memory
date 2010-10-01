@@ -1,4 +1,7 @@
+package memory;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,6 +16,7 @@ public class Player extends JButton implements ActionListener, Comparable {
   private int score;
   private String name;
   
+  /* Grafisk egenskaper */
   private Color activeColor   = Color.red;
   private Color inactiveColor = Color.gray;
   private EtchedBorder border = new EtchedBorder(EtchedBorder.LOWERED);
