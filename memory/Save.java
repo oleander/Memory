@@ -7,7 +7,7 @@ import java.io.*;
 * Ett valt i menyn
 * Sparar inställningarna till en fil
 */
-class Save extends JMenuItem implements ActionListener {
+public class Save extends JMenuItem implements ActionListener {
   
   private Memory memory = null;
   

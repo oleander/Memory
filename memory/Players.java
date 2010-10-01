@@ -8,7 +8,7 @@ import java.util.Collections;
 /**
 * Innehåller alla spelare i form av objekt från klassen Player
 */
-class Players extends JPanel {
+public class Players extends JPanel {
   private static final int prefHeight = 30;  
   
   /* Innehåller en lista med alla nuvarande spelare */

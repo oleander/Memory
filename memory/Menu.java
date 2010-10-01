@@ -5,7 +5,7 @@ import java.awt.event.*;
 /**
 * Menyn för applikationen
 */
-class Menu extends JMenuBar implements ActionListener {
+public class Menu extends JMenuBar implements ActionListener {
   Memory creator;
   
   /**

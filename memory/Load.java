@@ -7,7 +7,7 @@ import java.io.*;
 * Ett valt i menyn
 * Läser inställningarna från en fil
 */
-class Load extends JMenuItem implements ActionListener {
+public class Load extends JMenuItem implements ActionListener {
   
   private Memory memory = null;
   

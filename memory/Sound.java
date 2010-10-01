@@ -5,7 +5,7 @@ import  java.awt.Toolkit;
 /**
 * Spelar upp ljud för applikationen
 */
-class Sound {
+public class Sound {
   
   /**
   * Spelar upp ett fel-ljud

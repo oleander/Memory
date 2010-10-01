@@ -9,7 +9,7 @@ import java.io.File;
 /**
 * Innehåller ramen för spelet
 */
-class Memory extends JFrame {
+public class Memory extends JFrame {
   private static int defaultPlayers  = 2;
   private static int defaultCards    = 12;
   private static int defaultRows     = 4;
