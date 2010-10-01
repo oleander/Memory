@@ -1,4 +1,3 @@
-package memory;
 
 import javax.swing.*;
 import java.io.*;
@@ -7,6 +6,9 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+* Innehåller alla spelare i form av objekt från klassen Player
+*/
 class Players extends JPanel {
   private static final int prefHeight = 30;  
   
@@ -83,6 +85,11 @@ class Players extends JPanel {
     }
   }
   
+  /**
+  * Gör det möjligt att sätta vilken spelare som är aktiv
+  * Används vid inladdning av spel från fil
+  * @param i, vilket spelare från 0 till n är det som är den nuvarande spelaren?
+  */
   public void setCurrentPlayer(int i){
     this.currentPlayer = i;
   }

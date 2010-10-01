@@ -1,4 +1,4 @@
-package memory;
+
 
 import java.awt.Color;
 import java.awt.event.*;
@@ -27,7 +27,8 @@ public class Card extends JButton implements ActionListener, Serializable{
 	* Skapar ett kort med ansiktet neråt
 	* @param id - ett unikt id
 	*/
-  public Card (int id, String value) {
+  public Card (int id, ImageIcon value) {
+    this(value);
     this.id = id;
     this.value = value;
     this.state = State.DOWN;

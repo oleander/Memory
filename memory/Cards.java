@@ -1,4 +1,4 @@
-package memory;
+
 
 import javax.swing.*;
 import java.awt.*;  
@@ -42,6 +42,9 @@ class Cards extends JPanel implements ActionListener, Serializable {
   /* Antalet kort i applikationen */
   private int numCards = 0;
   
+  /* Relativ sökväg till bild-mappen */
+  private String path = "icons/";
+  
   /**
   * Konstruktor
   * @paras rows antalet rader som spelplanen ska innehålla
@@ -61,18 +64,10 @@ class Cards extends JPanel implements ActionListener, Serializable {
     Card card2 = null;
     /* Här börjar alla roliga tecken */
     int startValue = 161;
+    
     for (int i = startValue; i < (startValue + numOfCards/2); i++) {
-      
-      /* Översätter nuvarande siffran till en char */
-      digit = (char) i;
-      
-      /* En något otorr kod 
-         Behöver städas upp vid tillfälle */
-      
-      /* Skickar med ett unikt värde i form av en tal 
-         Sätter texten på knappen, i det här fallet så används ASCII-koden för {i} som namn */
-      card = new Card(i, Character.toString(digit));
-      card2 = new Card(i, Character.toString(digit));
+      card = new Card(i, new ImageIcon(this.images()[i]));
+      card2 = new Card(i, new ImageIcon(this.images()[i]));
       
       this.cards.add(card); this.cards.add(card2);
     }
@@ -82,6 +77,15 @@ class Cards extends JPanel implements ActionListener, Serializable {
     
     /* Lägger till kort till vyn */
     this.update();
+  }
+  
+  /**
+  * Retunerar en lista med bilder
+  * @return En lista med länkar till bilder, alltså inte bilderna i sig
+  */
+  private String[] images(){
+    File dir = new File(path);
+    return dir.list();
   }
   
   /**

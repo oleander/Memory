@@ -1,13 +1,11 @@
-package memory;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.border.EtchedBorder;
+
 /**
  * Representerar en spelare. Håller reda på poängställningen. 
  * Spelaren kan vara aktiv eller inaktiv
@@ -83,7 +81,7 @@ public class Player extends JButton implements ActionListener, Comparable {
     updateText();
   }
   
-  // Uppdaterar texten på spelarknappen
+  /* Uppdaterar texten på spelarknappen */
   private void updateText() {
     this.setText(name + " - " + score + " points");
   }
@@ -108,7 +106,6 @@ public class Player extends JButton implements ActionListener, Comparable {
   /**
    * @return Spelarens namn
    */
-  
   public String getName() {
     return this.name;
   }

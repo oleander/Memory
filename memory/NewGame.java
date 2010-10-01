@@ -1,5 +1,3 @@
-package memory;
-
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -8,7 +6,6 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
