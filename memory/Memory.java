@@ -1,5 +1,3 @@
-package memory;
-
 import java.awt.BorderLayout;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -71,7 +69,18 @@ class Memory extends JFrame {
   public void nextPlayer(){
     players.nextPlayer();
   }
+
+  public void load(){
+    this.cards.load();
+    this.players.load();
+    this.validate();
+    this.pack();
+  }
   
+  public void save(){
+    this.cards.save();
+    this.players.save();
+  }
   /*
    * Körs när spelet är slut. Visar en dialog som meddelar vem eller vilka som vann. 
    */

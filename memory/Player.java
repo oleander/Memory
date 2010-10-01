@@ -1,5 +1,3 @@
-package memory;
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +21,31 @@ public class Player extends JButton implements ActionListener, Comparable {
    * @param name Spelarens namn
    */
   public Player(String name) {
-    this.name   = name;
-    score  = 0;
+    this.name = name;
+    score = 0;
     updateText();
     setBackground(inactiveColor);
     setBorder(border);
     this.addActionListener(this);
+  }
+  
+  /**
+  * Skapar en kopia på en spelare
+  * @return En kopia på en spelare
+  */
+  public Player clone(){
+    Player player = new Player(this.name);
+    player.score = this.score;
+    player.setBackground(this.getBackground());
+    player.updateText();
+    return player;
+  }
+  
+  /**
+  * Är spelaren aktiv?
+  */
+  public boolean isActive(){
+    return this.getBackground() == this.activeColor;
   }
   
   /**
