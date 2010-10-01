@@ -14,7 +14,7 @@ public class Card extends JButton implements ActionListener, Serializable{
   
   /* Logiska egenskaper */
   private int id;
-	private String value;
+	private ImageIcon value;
 	private State state;
 	
 	/* Grafisk egenskaper */
@@ -28,7 +28,7 @@ public class Card extends JButton implements ActionListener, Serializable{
 	* @param id - ett unikt id
 	*/
   public Card (int id, ImageIcon value) {
-    this(value);
+    this.setIcon(value);
     this.id = id;
     this.value = value;
     this.state = State.DOWN;
@@ -54,7 +54,7 @@ public class Card extends JButton implements ActionListener, Serializable{
     } else if (this.state == State.DOWN) {
     	this.state = State.UP;
     	this.setBackground(this.upColor);
-    	this.setText(this.value);
+    	this.setIcon(this.value);
     }
     
     this.repaint();

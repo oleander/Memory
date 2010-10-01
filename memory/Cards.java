@@ -43,7 +43,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
   private int numCards = 0;
   
   /* Relativ sökväg till bild-mappen */
-  private String path = "icons/";
+  private String path = "images/";
   
   /**
   * Konstruktor
