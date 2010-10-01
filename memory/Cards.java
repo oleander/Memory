@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.io.*;
 import java.util.Random;
 
+/**
+* Håller alla kort på plats av klassen Card
+*/
 class Cards extends JPanel implements ActionListener, Serializable {
   
   /* En lista med kort för den nyvarande spelplanen */
@@ -78,6 +81,12 @@ class Cards extends JPanel implements ActionListener, Serializable {
     this.update();
   }
   
+  /**
+  * Uppdaerar vyn med nya kort
+  * Körs oftast när nya spel laddas in eller startas om
+  * @param none
+  * @return none
+  */
   public void update(){
     /* Plockar bort alla gamla element från listan */
   	this.removeAll();
@@ -96,6 +105,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
     this.setLayout(new GridLayout(this.rows, this.numOfCards/this.rows));
     this.validate();
   }
+  
   /**
   * Klonar listan med kort
   * @return En lista med objekt från klassen Card

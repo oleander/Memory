@@ -37,6 +37,11 @@ class Memory extends JFrame {
     players.currentPlayer().incScore(); 
   }
   
+  /**
+  * Bygger upp menyn och sätter alla default-värden
+  * @param none
+  * @return none
+  */
   private void buildView() {
     /* Det är denna raden som gör att menyn placeras längst upp i applikationen i OS X */
     System.setProperty("apple.laf.useScreenMenuBar", "true");
@@ -70,6 +75,10 @@ class Memory extends JFrame {
     players.nextPlayer();
   }
 
+  /**
+  * Laddar in korten och alla spelare från externa filer
+  * Uppdaterar sedan vyn och packar om ramen
+  */
   public void load(){
     this.cards.load();
     this.players.load();
@@ -77,13 +86,17 @@ class Memory extends JFrame {
     this.pack();
   }
   
+  /**
+  * Sparar undran de nyvarande spelet i form av spelare och kort
+  */
   public void save(){
     this.cards.save();
     this.players.save();
   }
+  
   /*
-   * Körs när spelet är slut. Visar en dialog som meddelar vem eller vilka som vann. 
-   */
+  * Körs när spelet är slut. Visar en dialog som meddelar vem eller vilka som vann. 
+  */
   protected void gameEnded(){
     ArrayList<Player> winners = players.getWinners();
     if (winners.size() == 1) {
@@ -98,7 +111,7 @@ class Memory extends JFrame {
     NewGame newGame = new NewGame(this);
   }
   
-  // Startar ett nytt spel
+  /* Startar ett nytt spel */
   protected void initialize(int numOfPlayers, int numOfCards, int numOfRows){
     // Tar bort alla nuvarande fönster på spelplanen
     this.innerPanel.removeAll();
