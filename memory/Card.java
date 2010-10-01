@@ -21,7 +21,12 @@ public class Card extends JButton implements ActionListener, Serializable{
 	private Color invisibleColor = Color.white;
 	private Color downColor      = Color.darkGray;
 	private Color upColor        = Color.gray;
+	
+	/* Visar när kortet inte är flippat */
 	private ImageIcon blank      = new ImageIcon("images/blank.png");
+	
+	/* Visas när kortet är borttaget m.h.a. remove() */
+  private ImageIcon empty      = new ImageIcon("images/empty.png");
   
 	/**
 	* Skapar ett kort med ansiktet neråt
@@ -68,12 +73,12 @@ public class Card extends JButton implements ActionListener, Serializable{
   public void remove() {
 	  this.state = State.INVISIBLE;
 	  this.setBackground(invisibleColor);
-	  this.setIcon(blank);
+	  this.setIcon(empty);
   }
   
   /**
   * Kontrollerar om två kort är lika
-  * @return true om ingående kort har samma värde, alltså text som instansen
+  * @return true om ingående kort har samma värde
   * @param Ett kort av klassen Card
   */
   public boolean equals(Card card){
