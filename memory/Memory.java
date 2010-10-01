@@ -11,7 +11,7 @@ import java.io.File;
 */
 class Memory extends JFrame {
   private static int defaultPlayers  = 2;
-  private static int defaultCards    = 20;
+  private static int defaultCards    = 12;
   private static int defaultRows     = 4;
   private static Dimension minSize  = new Dimension(500, 0);
   private Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -155,8 +155,12 @@ class Memory extends JFrame {
   /* Räknar ut maxantalet kort som vi kan använda*/
   private int calcMaxCards() {
     File dir = new File("images");
-    int nImages = dir.list().length;
-    
-    return nImages < defaultCards ? defaultCards : nImages;
+    int nImages = 0;
+    for (String s : dir.list()) {
+      if (s.endsWith(".png")) {
+        nImages++;
+      }
+    }
+    return nImages*2;
   }
 }
