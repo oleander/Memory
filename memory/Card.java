@@ -22,6 +22,7 @@ public class Card extends JButton implements ActionListener, Serializable{
 	private Color downColor      = Color.darkGray;
 	private Color upColor        = Color.gray;
 	private ImageIcon blank      = new ImageIcon("images/blank.png");
+  private ImageIcon empty      = new ImageIcon("images/empty.png");
   
 	/**
 	* Skapar ett kort med ansiktet neråt
@@ -68,7 +69,7 @@ public class Card extends JButton implements ActionListener, Serializable{
   public void remove() {
 	  this.state = State.INVISIBLE;
 	  this.setBackground(invisibleColor);
-	  this.setIcon(blank);
+	  this.setIcon(empty);
   }
   
   /**
