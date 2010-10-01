@@ -62,7 +62,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
     
     ArrayList<String> images = this.images();
     
-    for (int i = 0; i < numOfCards; i++) {
+    for (int i = 0; i < numOfCards/2; i++) {
       card = new Card(i, new ImageIcon(images.get(i)));
       card2 = new Card(i, new ImageIcon(images.get(i)));
       
