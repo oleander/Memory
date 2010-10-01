@@ -16,11 +16,24 @@ class Sound {
   
   /**
   * Spelar upp ett OK-ljud
-  * Om OK-ljudet inte finns så spelas error() upp istället
+  * Om ljudet inte finns så spelas error() upp istället
   */
   public static void okey(){
+    Sound.play("tada");
+  }
+  
+  /**
+  * Spelar upp ett vinnar-ljud
+  * Om ljudet inte finns så spelas error() upp istället
+  */
+  public static void winner(){
+    Sound.play("hallelujah");
+  }
+  
+  /* Spelar upp ingående ljudsträng */
+  private static void play(String media){
     try{
-      InputStream in = new FileInputStream("audio/tada.wav");
+      InputStream in = new FileInputStream("audio/" + media + ".wav");
       AudioStream as = new AudioStream(in);         
       AudioPlayer.player.start(as);
     } catch(Exception e) {

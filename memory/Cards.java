@@ -241,11 +241,17 @@ class Cards extends JPanel implements ActionListener, Serializable {
     
     /* Om alla kort är osynliga är spelet slut. */
     if (this.invisible == this.numOfCards) {
+      
+      /* Spelar upp ett ljud som indikerar på att någon har vunnit */
+      Sound.winner();
+      
+      /* Meddelar att spelet är avslutat */
       creator.gameEnded();
+      
       return;
     }
     
-    /* Vänder tillbaka båda korten, om några sekunder... */
+    /* Vänder tillbaka båda korten, om några sekunder {this.sleepTime}... */
     this.sleep(card);
     this.sleep(this.activeCard);
     
