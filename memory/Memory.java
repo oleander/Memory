@@ -4,6 +4,7 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.io.File;
 
 /**
 * Innehåller ramen för spelet
@@ -16,6 +17,9 @@ class Memory extends JFrame {
   private Toolkit toolkit = Toolkit.getDefaultToolkit();
   private Dimension screenSize = toolkit.getScreenSize();
  
+  // Maxantalet kort
+  public int maxCards;
+  
   private Players players;
   private Cards cards;
   private JPanel innerPanel;
@@ -27,8 +31,13 @@ class Memory extends JFrame {
    * @param numOfRows Antalet rader
    */
   public Memory(int numOfPlayers, int numOfCards, int numOfRows){
+    // Kalkylerar maxantalet kort
+    this.maxCards = this.calcMaxCards();
+    
+    // Om önskat antal kort är större än maxantalet kort används maxantalet kort
+    int n = numOfCards < maxCards ? numOfCards : maxCards;
     this.players = new Players(numOfPlayers);
-    this.cards   = new Cards(numOfRows, numOfCards, this);
+    this.cards   = new Cards(numOfRows, n, this);
     this.setLocation((screenSize.width/2 - this.getWidth()/2), (screenSize.height/2 - this.getHeight()/2));
     this.setMinimumSize(minSize);
     buildView();
@@ -38,7 +47,7 @@ class Memory extends JFrame {
    * Defaultkonstruktorn skapar ett spel med två spelare, 100 kort och 10 rader
    */
   public Memory() {
-    this(defaultPlayers, defaultCards, defaultRows);
+    this(defaultPlayers,defaultCards, defaultRows);
   }
   
   /**
@@ -119,7 +128,7 @@ class Memory extends JFrame {
       }
       JOptionPane.showMessageDialog(null, message);
     }
-    NewGame newGame = new NewGame(this);
+    NewGame newGame = new NewGame(this, maxCards);
   }
   
   /* Startar ett nytt spel */
@@ -141,5 +150,13 @@ class Memory extends JFrame {
   private void updateView() {
     this.validate();
     this.pack();
+  }
+  
+  /* Räknar ut maxantalet kort som vi kan använda*/
+  private int calcMaxCards() {
+    File dir = new File("images");
+    int nImages = dir.list().length;
+    
+    return nImages < defaultCards ? defaultCards : nImages;
   }
 }

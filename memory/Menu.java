@@ -51,6 +51,6 @@ class Menu extends JMenuBar implements ActionListener {
   }
   
   private void newGame() {
-    NewGame newGame = new NewGame(creator);
+    NewGame newGame = new NewGame(creator, creator.maxCards);
   }
 }

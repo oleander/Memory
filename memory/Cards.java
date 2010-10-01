@@ -81,7 +81,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
   }
   
   /**
-  * Retunerar en lista med bilder
+  * Returnerar en lista med bilder
   * @return En lista med länkar till bilder, alltså inte bilderna i sig
   */
   private ArrayList<String> images(){
@@ -99,7 +99,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
   }
   
   /**
-  * Uppdaerar vyn med nya kort
+  * Uppdaterar vyn med nya kort
   * Körs oftast när nya spel laddas in eller startas om
   * @param none
   * @return none
