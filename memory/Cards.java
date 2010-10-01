@@ -57,18 +57,14 @@ class Cards extends JPanel implements ActionListener, Serializable {
     this.rows = rows;
     this.numOfCards = numOfCards;
     
-    char digit;
     Card card = null;
     Card card2 = null;
-    /* Här börjar alla roliga tecken */
-    int startValue = 161;
-    int x = 0;
+    
     ArrayList<String> images = this.images();
     
-    for (int i = startValue; i < (startValue + numOfCards/2); i++) {
-      x++;
-      card = new Card(i, new ImageIcon(images.get(x)));
-      card2 = new Card(i, new ImageIcon(images.get(x)));
+    for (int i = 0; i < numOfCards; i++) {
+      card = new Card(i, new ImageIcon(images.get(i)));
+      card2 = new Card(i, new ImageIcon(images.get(i)));
       
       this.cards.add(card); this.cards.add(card2);
     }
