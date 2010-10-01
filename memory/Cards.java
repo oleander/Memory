@@ -227,12 +227,16 @@ class Cards extends JPanel implements ActionListener, Serializable {
       /* Registrera antalet osynliga kort */
       this.invisible += 2;
       
+      /* Spelar upp ett ok-ljud */
+      Sound.okey();
+      
     } else {
       
       /* Byter till nästa spelare */
       creator.nextPlayer();
       
-      Toolkit.getDefaultToolkit().beep();
+      /* Spelar upp ett fel-ljud */
+      Sound.error();
     }
     
     /* Om alla kort är osynliga är spelet slut. */
