@@ -78,7 +78,7 @@ public class Card extends JButton implements ActionListener, Serializable{
   
   /**
   * Kontrollerar om två kort är lika
-  * @return true om ingående kort har samma värde, alltså text som instansen
+  * @return true om ingående kort har samma värde
   * @param Ett kort av klassen Card
   */
   public boolean equals(Card card){
