@@ -23,10 +23,10 @@ public class Card extends JButton implements ActionListener, Serializable{
 	private Color upColor        = Color.gray;
 	
 	/* Visar när kortet inte är flippat */
-	private ImageIcon blank      = new ImageIcon("images/blank.png");
+	private ImageIcon blank      = new ImageIcon("blank.png");
 	
 	/* Visas när kortet är borttaget m.h.a. remove() */
-  private ImageIcon empty      = new ImageIcon("images/empty.png");
+  private ImageIcon empty      = new ImageIcon("empty.png");
   
 	/**
 	* Skapar ett kort med ansiktet neråt
