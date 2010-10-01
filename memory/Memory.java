@@ -1,11 +1,18 @@
+package memory;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 class Memory extends JFrame {
   private static int defaultPlayers  = 2;
   private static int defaultCards    = 20;
   private static int defaultRows     = 4;
+  private static Dimension minSize  = new Dimension(500, 0);
+  private Toolkit toolkit = Toolkit.getDefaultToolkit();
+  private Dimension screenSize = toolkit.getScreenSize();
  
   private Players players;
   private Cards cards;
@@ -20,6 +27,8 @@ class Memory extends JFrame {
   public Memory(int numOfPlayers, int numOfCards, int numOfRows){
     this.players = new Players(numOfPlayers);
     this.cards   = new Cards(numOfRows, numOfCards, this);
+    this.setLocation((screenSize.width/2 - this.getWidth()/2), (screenSize.height/2 - this.getHeight()/2));
+    this.setMinimumSize(minSize);
     buildView();
   }
   
@@ -69,7 +78,10 @@ class Memory extends JFrame {
   public void nextPlayer(){
     players.nextPlayer();
   }
-
+  
+  /**
+   * Laddar det sparade spelet.
+   */
   public void load(){
     this.cards.load();
     this.players.load();
@@ -77,6 +89,9 @@ class Memory extends JFrame {
     this.pack();
   }
   
+  /**
+   * Sparar det nuvarande speltillståndet.
+   */
   public void save(){
     this.cards.save();
     this.players.save();
@@ -110,6 +125,11 @@ class Memory extends JFrame {
     // lägger till de nya panelerna och uppdaterar
     this.innerPanel.add(players, BorderLayout.SOUTH);
     this.innerPanel.add(cards, BorderLayout.CENTER);
+    this.validate();
+    this.pack();
+  }
+  
+  private void updateView() {
     this.validate();
     this.pack();
   }
