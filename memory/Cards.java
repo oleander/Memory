@@ -22,7 +22,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
   private Card activeCard = null;
   
   /* Hur länge ska vi sova? , i ms */
-  private int sleepTime = 1000;
+  private int sleepTime = 2000;
   
   /* Innehåller huvudramen för spelet */
   private Memory creator = null;
