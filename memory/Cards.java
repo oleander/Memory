@@ -1,5 +1,3 @@
-
-
 import javax.swing.*;
 import java.awt.*;  
 import java.awt.event.*;
@@ -64,10 +62,13 @@ class Cards extends JPanel implements ActionListener, Serializable {
     Card card2 = null;
     /* Här börjar alla roliga tecken */
     int startValue = 161;
+    int x = 0;
+    ArrayList<String> images = this.images();
     
     for (int i = startValue; i < (startValue + numOfCards/2); i++) {
-      card = new Card(i, new ImageIcon(this.images()[i]));
-      card2 = new Card(i, new ImageIcon(this.images()[i]));
+      x++;
+      card = new Card(i, new ImageIcon(images.get(x)));
+      card2 = new Card(i, new ImageIcon(images.get(x)));
       
       this.cards.add(card); this.cards.add(card2);
     }
@@ -83,9 +84,18 @@ class Cards extends JPanel implements ActionListener, Serializable {
   * Retunerar en lista med bilder
   * @return En lista med länkar till bilder, alltså inte bilderna i sig
   */
-  private String[] images(){
+  private ArrayList<String> images(){
     File dir = new File(path);
-    return dir.list();
+    ArrayList<String> images = new ArrayList<String>();
+    
+    for(String image : dir.list()){
+      /* Kontrollerar så att filen har en filtypen png
+         MIME-typen skulle även kunna kollas, om tiden fanns */
+      if(image.endsWith(".png")){
+        images.add(path + image);
+      }
+    }
+    return images;
   }
   
   /**
@@ -104,7 +114,6 @@ class Cards extends JPanel implements ActionListener, Serializable {
       c.validate();
       this.add(c);
       if(c.isInvisible()){
-        System.out.println("INC");
         this.invisible++;
       }
     }
@@ -137,7 +146,6 @@ class Cards extends JPanel implements ActionListener, Serializable {
       FileOutputStream fos = new FileOutputStream("cards.memory");
       ObjectOutputStream oos = new ObjectOutputStream(fos);
       oos.writeObject(this.clone());
-      System.out.println("Sparar!");
       oos.close();
     }
     catch(Exception error){
@@ -196,7 +204,7 @@ class Cards extends JPanel implements ActionListener, Serializable {
     Card card = (Card) e.getSource();
     
     /* Är kortet redan vänt? */
-    if(card.isUp()){
+    if(card.isUp() || card.isInvisible()){
       return;
     }
     
@@ -217,27 +225,26 @@ class Cards extends JPanel implements ActionListener, Serializable {
       creator.hasScored();
       
       /* Ta bort båda korten */
-      card.remove();
-      this.activeCard.remove();
+      card.setInvisible();
+      this.activeCard.setInvisible();
       
       /* Registrera antalet osynliga kort */
       this.invisible += 2;
     } else {
-      
-      /* Vänder tillbaka båda korten, om några sekunder... */
-      this.sleep(card);
-      this.sleep(this.activeCard);
       
       /* Byter till nästa spelare */
       creator.nextPlayer();
     }
     
     /* Om alla kort är osynliga är spelet slut. */
-    
     if (this.invisible == this.numOfCards) {
       creator.gameEnded();
       return;
     }
+    
+    /* Vänder tillbaka båda korten, om några sekunder... */
+    this.sleep(card);
+    this.sleep(this.activeCard);
     
     /* Nollställer de aktiva kortet för nästa omgång */
     this.activeCard = null;    

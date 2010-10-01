@@ -1,11 +1,10 @@
-
-
 import java.awt.Color;
 import java.awt.event.*;
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.*;
 import java.io.*;
+import java.awt.Dimension;
 
 /**
 * Ett kort i ett memoryspel
@@ -22,18 +21,20 @@ public class Card extends JButton implements ActionListener, Serializable{
 	private Color invisibleColor = Color.white;
 	private Color downColor      = Color.darkGray;
 	private Color upColor        = Color.gray;
+	private ImageIcon blank      = new ImageIcon("images/blank.png");
   
 	/**
 	* Skapar ett kort med ansiktet neråt
 	* @param id - ett unikt id
 	*/
   public Card (int id, ImageIcon value) {
-    this.setIcon(value);
+    this.setIcon(blank);
     this.id = id;
     this.value = value;
     this.state = State.DOWN;
     this.setBorder(border);
     this.setBackground(this.downColor);
+    this.setPreferredSize(new Dimension(value.getIconWidth(), value.getIconHeight()));
   }
   
   /**
@@ -50,7 +51,7 @@ public class Card extends JButton implements ActionListener, Serializable{
     if (this.state == State.UP) {
     	this.state = State.DOWN;
     	this.setBackground(this.downColor);
-    	this.setText("");
+    	this.setIcon(blank);
     } else if (this.state == State.DOWN) {
     	this.state = State.UP;
     	this.setBackground(this.upColor);
@@ -58,6 +59,7 @@ public class Card extends JButton implements ActionListener, Serializable{
     }
     
     this.repaint();
+    this.validate();
   }
   
   /**
@@ -66,7 +68,7 @@ public class Card extends JButton implements ActionListener, Serializable{
   public void remove() {
 	  this.state = State.INVISIBLE;
 	  this.setBackground(invisibleColor);
-	  this.setText("");
+	  this.setIcon(blank);
   }
   
   /**
@@ -75,7 +77,7 @@ public class Card extends JButton implements ActionListener, Serializable{
   * @param Ett kort av klassen Card
   */
   public boolean equals(Card card){
-    return this.value.equals(card.value);
+    return this.id == card.id;
   }
   
   /**
@@ -105,6 +107,14 @@ public class Card extends JButton implements ActionListener, Serializable{
   }
   
   /**
+  * Är kortet inaktiverat ?
+  * @return Returnerar true om kortet är osynligt
+  */
+  public boolean isInvisible() {
+    return this.state == State.INVISIBLE;
+  }
+  
+  /**
   * Skapar en klon av kortet
   * @return ett objekt av typen Card
   */
@@ -116,7 +126,7 @@ public class Card extends JButton implements ActionListener, Serializable{
     
     if(this.state == State.INVISIBLE){
       card.setBackground(this.invisibleColor);
-      card.setText("");
+      card.setIcon(blank);
     } else {
       card.setBackground(this.downColor);
     }
@@ -144,15 +154,21 @@ public class Card extends JButton implements ActionListener, Serializable{
    /* Stannar timern, så att inte denna metoden körs igen */
    timer.stop();
    
+   /* Om kortet är inaktiverat så ska kortet 
+      inte flippas utan plockas bort */
+   if(this.isInvisible()){
+     this.remove();
+     return;
+   }
+   
    /* Flippar tillbaka kortet */
    this.flip();
   }
   
   /**
-  * Är kortet synligt ?
-  * @return True om kortet är synligt
+  * Sätter det nuvarande kortet som osynligt
   */
-  public boolean isInvisible(){
-    return this.state == State.INVISIBLE;
+  public void setInvisible(){
+    this.state = State.INVISIBLE;
   }
 }

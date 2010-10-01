@@ -1,4 +1,3 @@
-
 import javax.swing.*;
 import java.io.*;
 import java.awt.Dimension;
@@ -104,7 +103,6 @@ class Players extends JPanel {
       FileOutputStream fos = new FileOutputStream("players.memory");
       ObjectOutputStream oos = new ObjectOutputStream(fos);
       oos.writeObject(this.clone());
-      System.out.println("Sparar!");
       oos.close();
     }
     catch(Exception error){

@@ -45,7 +45,6 @@ class Menu extends JMenuBar implements ActionListener {
     if(e.getActionCommand().equals("Quit")){
 	    System.exit(0);
 	  } else if (e.getActionCommand().equals("Save")) {
-	    System.out.println("Spara");
 	  } else {
 	    newGame();
 	  }
