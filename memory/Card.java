@@ -153,8 +153,14 @@ public class Card extends JButton implements ActionListener, Serializable{
   */
   public void actionPerformed(ActionEvent e){
     
+  
     /* Konverterar ingående objekt till ett kort, Java-style */
    Timer timer = (Timer) e.getSource();
+   
+   Cards cards = (Cards) this.getParent();
+   
+   /* Aktiverar alla kort igen, så att dom går att klicka på */
+   cards.setFreezed(false);
    
    /* Stannar timern, så att inte denna metoden körs igen */
    timer.stop();

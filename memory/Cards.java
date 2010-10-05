@@ -10,7 +10,7 @@ import java.util.Random;
 /**
 * Håller alla kort på plats av klassen Card
 */
-class Cards extends JPanel implements ActionListener, Serializable {
+public class Cards extends JPanel implements ActionListener, Serializable {
   
   /* En lista med kort för den nyvarande spelplanen */
   private ArrayList<Card> cards = new ArrayList<Card>();
@@ -30,6 +30,12 @@ class Cards extends JPanel implements ActionListener, Serializable {
   /* Grafiska egenskaper */
   private GridLayout layout;
   private EmptyBorder border = new EmptyBorder(20, 32, 20, 32);
+  
+  /* Anger hurvida kortleken är fryst eller ej 
+     Från början så ska det alltid gå att klicka på ett kort
+     Där av default-värdet false
+  */
+  private boolean freezed = false;
   
   /* Antalet osynliga kort */
   private int invisible;
@@ -120,6 +126,22 @@ class Cards extends JPanel implements ActionListener, Serializable {
   }
   
   /**
+  * Kolla om det går att klicka på några kort i spelet
+  * @return Är alla kort i spelet frysta ?
+  */
+  public boolean isFreezed(){
+    return this.freezed;
+  }
+  
+  /**
+  * @param var, sätter kortleken till ett bestämt läge
+                Antingen så är alla kort låsta, eller så är alla kort olåsta.
+  */
+  public void setFreezed(boolean var){
+    this.freezed = var;
+  }
+  
+  /**
   * Klonar listan med kort
   * @return En lista med objekt från klassen Card
   * @param none
@@ -196,6 +218,12 @@ class Cards extends JPanel implements ActionListener, Serializable {
   * @return none
   */
   public void actionPerformed(ActionEvent e){
+    
+    /* Om kortleken är fryst så ska man inte kunna klicka på några kort */
+    if(this.isFreezed()){
+      return;
+    }
+    
     /* Varför måste man göra så här?! */
     Card card = (Card) e.getSource();
     
@@ -212,6 +240,8 @@ class Cards extends JPanel implements ActionListener, Serializable {
       this.activeCard = card;
       return;
     }
+    
+    this.setFreezed(true);
     
     /* Har första kortet samma värde som det nuvarande ?
      * Då har spelaren fått ett poäng och paret görs osynligt.
@@ -256,6 +286,6 @@ class Cards extends JPanel implements ActionListener, Serializable {
     this.sleep(this.activeCard);
     
     /* Nollställer de aktiva kortet för nästa omgång */
-    this.activeCard = null;    
+    this.activeCard = null;
   }
 }
